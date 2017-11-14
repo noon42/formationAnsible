@@ -35,5 +35,5 @@ backend be_app_servers
     balance roundrobin
     option httpchk
 {% for server in groups['app-servers'] %}
-    server      vm_{{ server|replace('.', '_') }} {{ server }}:8080 check
+    server      vm_{{ server|replace('.', '_') }} {{ hostvars[server]['ansible_default_ipv4']['address'] }}:8080 check
 {% endfor %}
